@@ -1,0 +1,44 @@
+/* === Footer Styling === */
+.footer {
+  background-color: #f0f0f0;
+  padding: 2rem 1rem;
+  text-align: center;
+  font-size: 0.95rem;
+  color: #555;
+  border-top: 1px solid #ddd;
+  margin-top: 3rem;
+}
+
+.footer p {
+  margin: 0.5rem 0;
+}
+
+.footer-contact,
+.footer-links,
+.footer-social {
+  margin-top: 1rem;
+  line-height: 1.6;
+}
+
+.footer a {
+  color: #3f51b5;
+  text-decoration: none;
+  margin: 0 0.5rem;
+}
+
+.footer a:hover {
+  text-decoration: underline;
+}
+
+/* Responsive tweaks */
+@media (max-width: 600px) {
+  .footer {
+    font-size: 0.9rem;
+    padding: 1.5rem 1rem;
+  }
+
+  .footer a {
+    display: block;
+    margin: 0.25rem 0;
+  }
+}

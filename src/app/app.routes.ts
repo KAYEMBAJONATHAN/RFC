@@ -5,8 +5,14 @@ import { authGuardGuard } from '../Servicres/auth-guard-guard';
 export const routes: Routes = [
   {
     path: '',
-    redirectTo: 'signup',
+    redirectTo: 'home',
     pathMatch: 'full'
+  },
+  {
+    path: 'home',
+    canActivate: [authGuardGuard],
+    loadComponent: () =>
+      import('./components/home/home').then(m => m.HomeComponent)
   },
   {
     path: 'signup',
@@ -18,9 +24,28 @@ export const routes: Routes = [
       import('./components/login/login').then(m => m.LoginComponent)
   },
   {
-    path: 'home',
-    canActivate: [authGuardGuard],
+    path: 'about',
     loadComponent: () =>
-      import('./components/home/home').then(m => m.HomeComponent)
+      import('./components/about/about').then(m => m.AboutComponent)
   },
+  {
+    path: 'ministries',
+    loadComponent: () =>
+      import('./components/ministries/ministries').then(m => m.MinistriesComponent)
+  },
+  {
+    path: 'events',
+    loadComponent: () =>
+      import('./components/events/events').then(m => m.EventsComponent)
+  },
+  {
+    path: 'contact',
+    loadComponent: () =>
+      import('./components/contact/contact').then(m => m.ContactComponent)
+  },
+  {
+    path: 'footer',
+    loadComponent: () =>
+      import('./components/footer/footer').then(m => m.FooterComponent)
+  }
 ];
