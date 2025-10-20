@@ -6,19 +6,32 @@ import { environment } from '../environments/environments.pro';
 @Injectable({
   providedIn: 'root'
 })
-
 export class AuthService {
   private readonly baseUrl = environment.apiBaseUrl;
   private readonly token = signal<string | null>(localStorage.getItem('jwt'));
   private readonly signedUp = signal<boolean>(false);
   private readonly selectedOptionSignal = signal<string>(localStorage.getItem('selectedOption') || '');
 
-  constructor(private http: HttpClient, private router: Router) { }
+  constructor(
+    private http: HttpClient,
+    private router: Router
+  ) { }
 
-  login(email: string, password: string) {
-    return this.http.post<{ token: string; message: string }>(`${this.baseUrl}/login`, { email, password });
+  signup(dto: { username: string; email: string; password: string }) {
+    return this.http.post<{ message: string }>(
+      `${this.baseUrl}/signup`,
+      dto
+    );
   }
 
+  login(dto: { username: string; email: string; password: string }) {
+    return this.http.post<{ token: string; message: string }>(
+      `${this.baseUrl}/login`,
+      dto
+    );
+  }
+
+  // ✅ Token management
   setToken(token: string) {
     this.token.set(token);
     localStorage.setItem('jwt', token);
@@ -34,23 +47,12 @@ export class AuthService {
     this.router.navigate(['/login']);
   }
 
-  signup(fullName: string, email: string, password: string): Promise<{ success: boolean }> {
-    return new Promise((resolve) => {
-      if (fullName && email && password) {
-        localStorage.setItem('fullName', fullName);
-        localStorage.setItem('email', email);
-        this.signedUp.set(true);
-        resolve({ success: true });
-      } else {
-        resolve({ success: false });
-      }
-    });
-  }
-
+  // ✅ Signup state (optional)
   isSignedUp(): boolean {
     return this.signedUp();
   }
 
+  // ✅ Option selection (e.g., role, mode)
   selectedOption(): string {
     return this.selectedOptionSignal();
   }
@@ -60,6 +62,7 @@ export class AuthService {
     this.selectedOptionSignal.set(option);
   }
 
+  // ✅ Simulated session prep
   async prepareSession(option: string): Promise<{ isValid: boolean }> {
     return new Promise(resolve => setTimeout(() => resolve({ isValid: true }), 500));
   }

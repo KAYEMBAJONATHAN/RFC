@@ -12,15 +12,15 @@ import { AuthService } from '../../../Servicres/authService';
   styleUrl: './signup.css'
 })
 export class SignupComponent {
- signupForm!: FormGroup;
+  signupForm!: FormGroup;
 
   constructor(
-    private authService: AuthService ,
+    private authService: AuthService,
     private router: Router,
     private fb: FormBuilder
   ) {
     this.signupForm = this.fb.group({
-      fullName: ['', [Validators.required, Validators.minLength(3)]],
+      username: ['', [Validators.required, Validators.minLength(3)]],
       email: ['', [Validators.required, Validators.email]],
       password: ['', [
         Validators.required,
@@ -42,13 +42,13 @@ export class SignupComponent {
       return;
     }
 
-    const { fullName, email, password } = this.signupForm.value;
-    const success = await this.authService.signup(fullName, email, password);
+    const { username, email, password } = this.signupForm.value;
+    const res = await this.authService.signup({ username, email, password }).toPromise();
 
-    if (success) {
+    if (res?.message === 'Signup successful.') {
       this.router.navigate(['/login']);
     } else {
-      alert('Signup failed. Please check your credentials.');
+      alert(res?.message || 'Signup failed. Please check your credentials.');
     }
   }
 }

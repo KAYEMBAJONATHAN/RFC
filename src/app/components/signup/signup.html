@@ -1,32 +1,19 @@
 <div class="content">
   <h2>Sign Up</h2>
   <form [formGroup]="signupForm" (ngSubmit)="signup()">
-    <input
-      formControlName="fullName"
-      placeholder="Full Name"
-      class="input"
-    />
-    <div *ngIf="signupForm.get('fullName')?.touched && signupForm.get('fullName')?.invalid" class="error">
-      <span *ngIf="signupForm.get('fullName')?.errors?.['required']">Full name is required.</span>
-      <span *ngIf="signupForm.get('fullName')?.errors?.['minlength']">Minimum 3 characters.</span>
+    <input formControlName="username" placeholder="Username" class="input" />
+    <div *ngIf="signupForm.get('username')?.touched && signupForm.get('username')?.invalid" class="error">
+      <span *ngIf="signupForm.get('username')?.errors?.['required']">Username is required.</span>
+      <span *ngIf="signupForm.get('username')?.errors?.['minlength']">Minimum 3 characters.</span>
     </div>
 
-    <input
-      formControlName="email"
-      placeholder="Email"
-      class="input"
-    />
+    <input formControlName="email" placeholder="Email" class="input" />
     <div *ngIf="signupForm.get('email')?.touched && signupForm.get('email')?.invalid" class="error">
       <span *ngIf="signupForm.get('email')?.errors?.['required']">Email is required.</span>
       <span *ngIf="signupForm.get('email')?.errors?.['email']">Invalid email format.</span>
     </div>
 
-    <input
-      formControlName="password"
-      type="password"
-      placeholder="Password"
-      class="input"
-    />
+    <input formControlName="password" type="password" placeholder="Password" class="input" />
     <div *ngIf="signupForm.get('password')?.touched && signupForm.get('password')?.invalid" class="error">
       <span *ngIf="signupForm.get('password')?.errors?.['required']">Password is required.</span>
       <span *ngIf="signupForm.get('password')?.errors?.['minlength']">Minimum 8 characters.</span>

@@ -52,15 +52,16 @@ export class LoginComponent {
 
   async login(username: string, email: string, password: string) {
     try {
-      const result = await this.authService.login(email, password).toPromise();
-      if (result?.token) {
-        this.authService.setToken(result.token);
+      const res = await this.authService.login({ username, email, password }).toPromise();
+      if (res?.token) {
+        this.authService.setToken(res.token);
         this.router.navigate(['/home']);
       } else {
-        alert(result?.message || 'Login failed.');
+        alert(res?.message || 'Login failed.');
       }
-    } catch (error) {
-      alert('Server error during login.');
+    } catch (error: any) {
+      console.error('Login error:', error);
+      alert(error.message || 'Server error during login.');
     }
   }
 
