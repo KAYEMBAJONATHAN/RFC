@@ -113,8 +113,9 @@ button[disabled] {
 
 /* === Hero Image === */
 .hero-image {
-  margin-top: 2rem;
-  text-align: center;
+  width: 100%;
+  height: 400px; /* Set a specific height for the container */
+  background-image: url('/assets/images/church-banner.jpg');
 }
 
 .hero-image img {
