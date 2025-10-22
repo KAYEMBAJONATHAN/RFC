@@ -1,10 +1,31 @@
-<nav class="navbar">
-  <a routerLink="/" routerLinkActive="active">Home</a>
-  <a routerLink="/about" routerLinkActive="active">About Us</a>
-  <a routerLink="/ministries" routerLinkActive="active">Ministries</a>
-  <a routerLink="/events" routerLinkActive="active">Events</a>
-  <a routerLink="/contact" routerLinkActive="active">Contact</a>
- <a routerLink="/login" routerLinkActive="active">Login</a>
-  <a routerLink="/signup" routerLinkActive="active">Signup</a>
-  <a routerLink="/footer" routerLinkActive="active">Footer</a>
+<div class="popup-overlay" *ngIf="popupOpen">
+  <div class="popup-content">
+    <h2>Access Restricted</h2>
+    <p>Please log in or sign up to continue.</p>
+
+    <button class="action-button login" (click)="redirectToLogin()">Login</button>
+
+    <button class="action-button signup" (click)="redirectToSignup()">Sign Up</button>
+
+    <button class="close-button" (click)="closePopup()">Continue as Guest</button>
+  </div>
+</div>
+
+<nav class="navbar" [class.hidden]="popupOpen">
+  <div class="menu-toggle" (click)="toggleMenu()">
+    <span class="bar"></span>
+    <span class="bar"></span>
+    <span class="bar"></span>
+  </div>
+
+  <ul [class.active]="menuOpen" class="nav-links">
+    <a routerLink="/" routerLinkActive="active">Home</a>
+    <a routerLink="/about" routerLinkActive="active">About US</a>
+    <a routerLink="/ministries" routerLinkActive="active">Ministries</a>
+    <a routerLink="/events" routerLinkActive="active">Events</a>
+    <a routerLink="/contact" routerLinkActive="active">Contact</a>
+    <a routerLink="/login" routerLinkActive="active">Login</a>
+    <a routerLink="/signup" routerLinkActive="active">Signup</a>
+    <a routerLink="/footer" routerLinkActive="active">Footer</a>
+  </ul>
 </nav>
