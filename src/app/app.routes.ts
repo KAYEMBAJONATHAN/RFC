@@ -47,5 +47,10 @@ export const routes: Routes = [
     path: 'footer',
     loadComponent: () =>
       import('./components/footer/footer').then(m => m.FooterComponent)
+  },
+  {
+    path: 'message-request',
+    loadComponent: () =>
+      import('./components/message-request/message-request').then(m => m.MessageRequestComponent)
   }
 ];

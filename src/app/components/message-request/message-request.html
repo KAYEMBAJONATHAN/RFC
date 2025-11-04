@@ -1,0 +1,8 @@
+<!-- message-request.component.html -->
+<form (ngSubmit)="submit()">
+  <input [(ngModel)]="model.messageText" name="messageText" placeholder="Message" required />
+  <input [(ngModel)]="model.recipientName" name="recipientName" placeholder="Recipient Name" required />
+  <input [(ngModel)]="model.recipientPhone" name="recipientPhone" placeholder="Phone" required />
+  <input [(ngModel)]="model.recipientEmail" name="recipientEmail" placeholder="Email" required />
+  <button type="submit">Send</button>
+</form>

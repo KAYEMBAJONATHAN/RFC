@@ -1,0 +1,5 @@
+.hero-image {
+  width: 100%;
+  height: 400px; /* Set a specific height for the container */
+  background-image: url('/assets/images/church-banner.jpg');
+}
