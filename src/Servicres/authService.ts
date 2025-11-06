@@ -2,6 +2,7 @@ import { HttpClient } from '@angular/common/http';
 import { Injectable, signal } from '@angular/core';
 import { Router } from '@angular/router';
 import { environment } from '../environments/environments.pro';
+import { Observable } from 'rxjs';
 
 @Injectable({
   providedIn: 'root'
@@ -31,7 +32,6 @@ export class AuthService {
     );
   }
 
-  // ✅ Token management
   setToken(token: string) {
     this.token.set(token);
     localStorage.setItem('jwt', token);
@@ -47,12 +47,10 @@ export class AuthService {
     this.router.navigate(['/login']);
   }
 
-  // ✅ Signup state (optional)
   isSignedUp(): boolean {
     return this.signedUp();
   }
 
-  // ✅ Option selection (e.g., role, mode)
   selectedOption(): string {
     return this.selectedOptionSignal();
   }
@@ -62,8 +60,11 @@ export class AuthService {
     this.selectedOptionSignal.set(option);
   }
 
-  // ✅ Simulated session prep
   async prepareSession(option: string): Promise<{ isValid: boolean }> {
     return new Promise(resolve => setTimeout(() => resolve({ isValid: true }), 500));
+  }
+
+  continueAsGuest(): Observable<{ token: string; message: string }> {
+    return this.http.post<{ token: string; message: string }>('api/Auth/guest', {});
   }
 }
